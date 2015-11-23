@@ -2,6 +2,7 @@
 #include <fstream>
 #include <sstream>
 #include <vector>
+#include "normalize.h"
 using namespace std;
 
 int main(int argc, char* argv[])
@@ -46,13 +47,11 @@ int main(int argc, char* argv[])
 		cin >> algorithm;
 	}
 
-	for (int i = 0; i < 100; i++)
-	{
-		for (int j = 0; j < 11; j++)
-		{
-			cout << data.at(i).at(j) << endl;
-		}
-	}
+	cout << "This dataset has " << data.at(0).size() - 1;
+	cout << " features (not including the class attribute), ";
+	cout << "with " << data.size() << " instances." << endl;
 
+	cout << "Please wait while I normalize the data...";
+	normalize(data);
 	return 0;
 }
