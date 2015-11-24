@@ -3,6 +3,8 @@
 #include <sstream>
 #include <vector>
 #include "normalize.h"
+#include "accuracy.h"
+#include "search.h"
 using namespace std;
 
 int main(int argc, char* argv[])
@@ -53,5 +55,7 @@ int main(int argc, char* argv[])
 
 	cout << "Please wait while I normalize the data...";
 	normalize(data);
+	
+	feature_search(data);
 	return 0;
 }
