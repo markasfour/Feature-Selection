@@ -21,23 +21,27 @@ bool intersect(vector <int> current_set, int j)
 void feature_search(vector < vector <float> > data)
 {
 	vector <int> current_set_of_features;
-	
+	float total_accuracy = 0;
+	vector <int> best_features;
+
 	for (int i = 1; i < data.at(0).size(); i++)
 	{
-		cout << "On the " << i << "th level of the search tree" << endl;
 		int feature_to_add_at_this_level;
 		float best_so_far_accuracy = 0;
-		
-		
 		for (int j = 1; j < data.at(0).size(); j++)
 		{
 			if (!intersect(current_set_of_features, j))
 			{
-				cout << "--Considering adding the " << j << " feature" << endl;
+				cout << "Using feature(s) {";
+				for (int p = 0; p < current_set_of_features.size(); p++)
+				{
+					cout << current_set_of_features.at(p) << ",";
+				}
+				cout << j << "} accuracy is ";
 				float accuracy = leave_one_out_cross_validation(data,
 																current_set_of_features,
 																j);
-				cout << "    Accuracy is " << accuracy << endl;
+				cout << accuracy << endl;
 				if (accuracy > best_so_far_accuracy)
 				{
 					best_so_far_accuracy = accuracy;
@@ -45,10 +49,36 @@ void feature_search(vector < vector <float> > data)
 				}
 			}
 		}
+		
+
 		current_set_of_features.push_back(feature_to_add_at_this_level);
-		cout << "On level " << i << " I added feature ";
-		cout << feature_to_add_at_this_level << " to current set" << endl;
+		if (best_so_far_accuracy > total_accuracy)
+		{
+			total_accuracy = best_so_far_accuracy;
+			best_features = current_set_of_features;
+		}
+		else
+		{
+			cout << "(Warning, accuracy, has decreased! Continuing search in case of local maxima)" << endl;
+		}
+		cout << "Feature set {";
+		for (int p = 0; p < current_set_of_features.size() - 1; p++)
+		{
+			cout << current_set_of_features.at(p) << ",";
+		}
+		cout << current_set_of_features.at(current_set_of_features.size() - 1);
+		cout <<"} was best, accuracy is ";
+		cout << best_so_far_accuracy << "%" << endl;
+		cout << endl;
 	}
+	cout << "Finished search!! The best feature subset is {";
+	for (int p = 0; p < best_features.size() - 1; p++)
+	{
+		cout << best_features.at(p) << ",";
+	}
+	cout << best_features.at(best_features.size() - 1);
+	cout << "}, which has an accuracy of " << total_accuracy << "%";
+	cout << endl;
 }
 
 #endif

@@ -47,14 +47,20 @@ int main(int argc, char* argv[])
 	{
 		cin >> algorithm;
 	}
-
+	
+	cout << endl;
 	cout << "This dataset has " << data.at(0).size() - 1;
 	cout << " features (not including the class attribute), ";
 	cout << "with " << data.size() << " instances." << endl;
+	cout << endl;
 
 	cout << "Please wait while I normalize the data...";
 	normalize(data);
-	
+	cout << endl;
+
+	cout << "Beginning search" << endl;
+	cout << endl;
+
 	feature_search(data);
 	return 0;
 }
