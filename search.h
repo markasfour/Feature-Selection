@@ -49,7 +49,6 @@ void feature_search(vector < vector <float> > data)
 				}
 			}
 		}
-		
 
 		current_set_of_features.push_back(feature_to_add_at_this_level);
 		if (best_so_far_accuracy > total_accuracy)
@@ -68,7 +67,7 @@ void feature_search(vector < vector <float> > data)
 		}
 		cout << current_set_of_features.at(current_set_of_features.size() - 1);
 		cout <<"} was best, accuracy is ";
-		cout << best_so_far_accuracy << "%" << endl;
+		cout << best_so_far_accuracy * 100 << "%" << endl;
 		cout << endl;
 	}
 	cout << "Finished search!! The best feature subset is {";
@@ -77,7 +76,7 @@ void feature_search(vector < vector <float> > data)
 		cout << best_features.at(p) << ",";
 	}
 	cout << best_features.at(best_features.size() - 1);
-	cout << "}, which has an accuracy of " << total_accuracy << "%";
+	cout << "}, which has an accuracy of " << total_accuracy * 100 << "%";
 	cout << endl;
 }
 

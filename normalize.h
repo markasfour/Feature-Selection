@@ -51,9 +51,12 @@ void normalize(vector < vector <float> > &data)
 		}
 		float mean = get_mean(mean_temp);
 		float sd = get_sd(mean_temp);
-		for (int i = 0; i < data.size(); i++)
+		if (sd != 0)
 		{
-			data.at(i).at(j) = (data.at(i).at(j) - mean) / sd;
+			for (int i = 0; i < data.size(); i++)
+			{
+				data.at(i).at(j) = (data.at(i).at(j) - mean) / sd;
+			}
 		}
 	}
 	cout << "Done!" << endl;

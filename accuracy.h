@@ -12,12 +12,14 @@ float euclidean_distance(vector <float> a,
 						 vector <int> current_features,
 						 int j)
 {
-	int x = 0;
+	float x = 0;
 	for (int i = 0; i < current_features.size(); i++)
 	{
+		//cout << pow(a.at(current_features.at(i)) - b.at(current_features.at(i)), 2) << endl;
 		x += (pow(a.at(current_features.at(i)) - b.at(current_features.at(i)), 2));
 	}
 	x += (pow(a.at(j) - b.at(j), 2));
+	//cout << "X = " << x << " sqrt(X) = " << sqrt(x) << endl;
 	return sqrt(x);
 }
 
@@ -28,30 +30,33 @@ float mean(vector <float> x)
 	{
 		sum += x.at(i);
 	}
-	return sum / x.size();
+	if (sum == 0)
+	{
+		return 0;
+	}
+	return sum / (float)x.size();
 }
 
 float leave_one_out_cross_validation(vector < vector <float> > data, 
 									 vector <int> current_features, 
 									 int j)
 {
-	//return rand();
 	float correct_classifications = 0;
 	vector <float> c1;
 	vector <float> c2;
-	for (int i = 0; i < data.size(); i++)
+	for (int i = 0; i < data.size(); i++)				//iterate through all data
 	{
-		vector <float> test_data = data.at(i);
-		for (int k = 0; k < data.size(); k++)
+		vector <float> test_data = data.at(i);			//set the leave-one-out test data
+		for (int k = 0; k < data.size(); k++)			//iterate through all data
 		{
-			if(data.at(k) != data.at(i))
+			if(data.at(k) != data.at(i))				//get distance between current data & test
 			{
 				float distance = euclidean_distance(test_data, data.at(k), current_features, j);
-				if (data.at(k).at(0) == 1)
+				if (data.at(k).at(0) == 1)				//if current data is class 1, record distance in class 1 distance bin
 				{
 					c1.push_back(distance);
 				}
-				else
+				else									//if current data is class 2, record distance in class 2 distance bin
 				{
 					c2.push_back(distance);
 				}
@@ -68,7 +73,7 @@ float leave_one_out_cross_validation(vector < vector <float> > data,
 		c1.clear();
 		c2.clear();
 	}
-	return correct_classifications / data.size();
+	return correct_classifications / (float)data.size();
 }
 
 #endif
