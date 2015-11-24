@@ -3,7 +3,6 @@
 #include <sstream>
 #include <vector>
 #include "normalize.h"
-#include "accuracy.h"
 #include "search.h"
 using namespace std;
 
