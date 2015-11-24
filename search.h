@@ -36,7 +36,8 @@ void feature_search(vector < vector <float> > data)
 				cout << "--Considering adding the " << j << " feature" << endl;
 				float accuracy = leave_one_out_cross_validation(data,
 																current_set_of_features,
-																j + 1);
+																j);
+				cout << "    Accuracy is " << accuracy << endl;
 				if (accuracy > best_so_far_accuracy)
 				{
 					best_so_far_accuracy = accuracy;
