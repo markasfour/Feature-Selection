@@ -55,12 +55,15 @@ int main(int argc, char* argv[])
 	cout << endl;
 
 	cout << "Please wait while I normalize the data...";
-	normalize(data);
+	//normalize(data);
 	cout << endl;
 
 	cout << "Beginning search" << endl;
 	cout << endl;
-
-	feature_search(data);
+	
+	if (algorithm == 1)
+		forward_search(data);
+	//else if (algorithm == 2)
+		//backwards_elimination(data);
 	return 0;
 }

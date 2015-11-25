@@ -18,7 +18,7 @@ bool intersect(vector <int> current_set, int j)
 	return false;
 }
 
-void feature_search(vector < vector <float> > data)
+void forward_search(vector < vector <float> > data)
 {
 	vector <int> current_set_of_features;
 	float total_accuracy = 0;
