@@ -25,7 +25,8 @@ float minimum(vector <float> x)
 float euclidean_distance(vector <float> a, 
 						 vector <float> b,
 						 vector <int> current_features,
-						 int j)
+						 int j,
+						 bool forwards)
 {
 	//cout << a.at(1) << " , " << b.at(1) << endl;
 	float x = 0;
@@ -33,7 +34,8 @@ float euclidean_distance(vector <float> a,
 	{
 		x += (pow(a.at(current_features.at(i)) - b.at(current_features.at(i)), 2));
 	}
-	x += (pow(a.at(j) - b.at(j), 2));
+	if (forwards)
+		x += (pow(a.at(j) - b.at(j), 2));
 	//cout << x << " , " << sqrt(x) << endl;
 	return sqrt(x);
 }
@@ -54,7 +56,8 @@ float mean(vector <float> x)
 
 float leave_one_out_cross_validation(vector < vector <float> > data, 
 									 vector <int> current_features, 
-									 int j)
+									 int j,
+									 bool forwards)
 {
 	//cout << endl;
 	float correct_classifications = 0;
@@ -69,7 +72,7 @@ float leave_one_out_cross_validation(vector < vector <float> > data,
 		{
 			if(k != i)									//get distance between current data & test
 			{
-				float distance = euclidean_distance(test_data, data.at(k), current_features, j);
+				float distance = euclidean_distance(test_data, data.at(k), current_features, j, forwards);
 				//cout << k << " -> " << distance << endl << endl;
 				if (distance < min_dist)				//get min distance
 				{
